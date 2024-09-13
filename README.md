@@ -1,4 +1,4 @@
-# Express Template Took From Schematics 2024 Backend
+# Express Template Taken From Schematics 2024 Backend
 ### Installing dependencies
 ```
 npm init -y
