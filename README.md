@@ -1,4 +1,4 @@
-# Schematics 2024 Backend
+# Express Template Took From Schematics 2024 Backend
 ### Installing dependencies
 ```
 npm init -y
@@ -13,10 +13,6 @@ npm install dotenv --save
 npm install -g nodemon --save
 ```
 ## Quick Start
-Clone the repo:
-```bash
-git clone https://github.com/Schematics-23/schematics24-backend
-```
 Install the dependencies:
 ```bash
 npm install
