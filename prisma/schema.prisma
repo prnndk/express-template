@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Divisi {
+  id         Int    @id @default(autoincrement())
+  namaDivisi String @map("nama_divisi")
+
+  // Foreign key
+  PendaftaranStaffDivisi PilihanStaff[] @relation("RelationPilihanStaffDivisi")
+}
+
+model PendaftaranStaff {
+  id                  Int      @id @default(autoincrement())
+  nama                String
+  nrp                 String   @unique
+  jenisKelamin        String   @map("jenis_kelamin")
+  email               String
+  noTelp              String   @map("no_telp")
+  idLine              String   @map("id_line")
+  asalKota            String   @map("asal_kota")
+  domisiliSby         String   @map("domisili_sby")
+  pengetahuan         String
+  motivasi            String
+  inovasi             String
+  kelebihanKekurangan String   @map("kelebihan_kekurangan")
+  harapan             String
+  kontakSponsor       String?  @map("kontak_sponsor")
+  kesibukan           String
+  skalaSch            Int      @map("skala_sch")
+  buktiLinkedin       String   @map("bukti_linkedin")
+  buktiInstagram      String   @map("bukti_instagram")
+  buktiTiktok         String   @map("bukti_tiktok")
+  buktiTwitter        String?  @map("bukti_twitter")
+  linkPortofolio      String   @map("link_portofolio")
+  pilihan             Json[]   @map("pilihan")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  // Foreign key
+  PendaftaranStaffDivisi PilihanStaff[] @relation("RelationPendaftaranStaffPilihanStaff")
+}
+
+model PilihanStaff {
+  id                 Int      @id @default(autoincrement())
+  pendaftaranStaffId Int      @map("pendaftaran_staff_id")
+  divisiId           Int      @map("divisi_id")
+  alasanDivisi       String?  @map("alasan_divisi")
+  prioritas          Int      @map("prioritas_divisi")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  // Foreign key
+  PendaftaranStaff PendaftaranStaff @relation("RelationPendaftaranStaffPilihanStaff", fields: [pendaftaranStaffId], references: [id])
+  Divisi           Divisi           @relation("RelationPilihanStaffDivisi", fields: [divisiId], references: [id])
+}
