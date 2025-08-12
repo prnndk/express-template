@@ -5,7 +5,7 @@ services:
     environment:
       - POSTGRES_USER=postgres        
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=schematics2024
+      - POSTGRES_DB=yourpassword1234
     ports:
       - 5432:5432
     volumes:
